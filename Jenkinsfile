@@ -2,10 +2,11 @@ pipeline{
            agent {
               label 'harshal-agent-1'          
            }
+           parameters {string defaultValue: 'master' , name: 'branch_name'}
         stages {
             stage("checkout the code"){
                 steps{
-                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/HarshalYeola20/javademo.git']])
+                     git branch: "$branch_name", url: 'https://github.com/HarshalYeola20/javademo.git'       
                 }
             }
             stage("build the job"){
